@@ -1,28 +1,27 @@
-def graphSnowfall(t):
 import matplotlib.pyplot as plt
 
-plt.ion()  # Enable interactive mode
-
 def graphSnowfall(t):
-    # Read data from file
+    # Read data from the file
     with open(t, 'r') as file:
-        lines = file.readlines()
+        snowfall_data = [int(line.strip()) for line in file]
 
-    # Initialize bins
-    bins = [0] * 10
+    # Aggregate the values into ranges
+    ranges = [0, 10, 20, 30, 40, 50]
+    aggregated_data = [0] * (len(ranges) - 1)
+    for snowfall in snowfall_data:
+        for i in range(len(ranges) - 1):
+            if ranges[i] < snowfall <= ranges[i + 1]:
+                aggregated_data[i] += 1
+                break
 
-    # Aggregate values into bins
-    for line in lines:
-        snowfall = int(line.strip())
-        bin_index = snowfall // 10
-        if bin_index < 10:
-            bins[bin_index] += 1
-        else:
-            bins[-1] += 1
-
-    # Create bar chart
-    plt.bar(range(0, 101, 10), bins)
-    plt.xlabel('Snowfall (cm)')
-    plt.ylabel('Occurrences')
-    plt.title('Snowfall Distribution')
+    # Plotting the bar chart
+    plt.bar([f"{ranges[i]}-{ranges[i+1]}" for i in range(len(ranges)-1)], aggregated_data, color='skyblue')
+    plt.xlabel('Snowfall Range (in cms)')
+    plt.ylabel('Frequency')
+    plt.title('Snowfall Accumulation')
+    # Save the plot as an image file
+    plt.savefig('snowfall_plot.png')
     plt.show()
+
+# Test the function
+graphSnowfall('snowfall_data.txt')
