@@ -15,7 +15,7 @@ def graphSnowfall(t):
                 break
 
     # Plotting the bar chart
-    plt.bar([f"{ranges[i]}-{ranges[i+1]}" for i in range(len(ranges)-1)], aggregated_data, color='skyblue')
+    plt.bar([f"{ranges[i]}-{ranges[i+1]}" for i in range(len(ranges)-1)], aggregated_data, color='red')
     plt.xlabel('Snowfall Range (in cms)')
     plt.ylabel('Frequency')
     plt.title('Snowfall Accumulation')
