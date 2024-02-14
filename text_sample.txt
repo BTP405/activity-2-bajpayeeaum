@@ -1,0 +1,3 @@
+This file shall be acting as sample for the question.
+File can be used by entering the filename with desired extension.
+The answer shown is the desired output for the question provided.
